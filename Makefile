@@ -18,7 +18,7 @@ LINT_PROCS ?= $(shell nproc)
 endif
 
 COMMIT ?= `git rev-parse --short HEAD 2>/dev/null`
-VERSION ?= `git describe --abbrev=0 --tags $(git rev-list --tags --max-count=1) 2>/dev/null | sed 's/v\(.*\)/\1/'`
+VERSION ?= `git describe --abbrev=0 --tags $(git rev-list --tags --max-count=1) 2>/dev/null | sed 's/v\(.*\)/\1/'`"-wyn"
 
 COMMIT_FLAG := -X `$(GO) list ./version`.GitCommit=$(COMMIT)
 VERSION_FLAG := -X `$(GO) list ./version`.Version=$(VERSION)
