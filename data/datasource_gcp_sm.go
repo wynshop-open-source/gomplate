@@ -21,6 +21,7 @@ type gcpSecretManagerGetter interface {
 }
 
 func readGCPSecretManager(ctx context.Context, source *Source, args ...string) ([]byte, error) {
+	source.mediaType = jsonMimetype
 	if source.gcpSecretManager == nil {
 		client, err := secretmanager.NewClient(ctx)
 		if err != nil {
@@ -36,8 +37,8 @@ func readGCPSecretManager(ctx context.Context, source *Source, args ...string) (
 	paramPath = strings.TrimLeft(paramPath, "/")
 
 	parts := strings.Split(paramPath, "/")
-	if len(parts) == 2 {
-		source.mediaType = jsonMimetype
+	numParts := len(parts)
+	if numParts == 2 {
 		var secrets []string
 		secretNameRegex := regexp.MustCompile("projects/\\d+/secrets/(.*)")
 		req := secretmanagerpb.ListSecretsRequest{
@@ -69,8 +70,9 @@ func readGCPSecretManager(ctx context.Context, source *Source, args ...string) (
 		}
 
 		return json.Marshal(secrets)
+	} else if numParts == 4 {
+		paramPath += "/versions/latest"
 	}
-	source.mediaType = textMimetype
 
 	req := secretmanagerpb.AccessSecretVersionRequest{
 		Name: paramPath,
@@ -81,5 +83,5 @@ func readGCPSecretManager(ctx context.Context, source *Source, args ...string) (
 		return nil, err
 	}
 
-	return versionData.Payload.Data, nil
+	return []byte(fmt.Sprintf("{\"latest\": \"%s\"}", versionData.Payload.Data)), nil
 }
