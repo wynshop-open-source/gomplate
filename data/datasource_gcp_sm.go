@@ -83,5 +83,9 @@ func readGCPSecretManager(ctx context.Context, source *Source, args ...string) (
 		return nil, err
 	}
 
-	return []byte(fmt.Sprintf("{\"latest\": \"%s\"}", versionData.Payload.Data)), nil
+	returnObj := map[string]string{
+		"latest": string(versionData.Payload.Data),
+	}
+
+	return json.Marshal(returnObj)
 }
