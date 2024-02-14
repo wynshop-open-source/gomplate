@@ -16,7 +16,6 @@ import (
 
 	"github.com/hairyhenderson/gomplate/v3/internal/iohelpers"
 	"github.com/hairyhenderson/yaml"
-	"github.com/pkg/errors"
 )
 
 // Parse a config file
