@@ -149,10 +149,12 @@ func TestDatasources_Vault_UserPassAuth(t *testing.T) {
 	defer v.vc.Sys().DisableAuth("userpass")
 	defer v.vc.Sys().DisableAuth("userpass2")
 	_, err = v.vc.Logical().Write("auth/userpass/users/dave", map[string]interface{}{
-		"password": "foo", "ttl": "10s", "policies": "readpol"})
+		"password": "foo", "ttl": "10s", "policies": "readpol",
+	})
 	require.NoError(t, err)
 	_, err = v.vc.Logical().Write("auth/userpass2/users/dave", map[string]interface{}{
-		"password": "bar", "ttl": "10s", "policies": "readpol"})
+		"password": "bar", "ttl": "10s", "policies": "readpol",
+	})
 	require.NoError(t, err)
 
 	o, e, err := cmd(t, "-d", "vault=vault:///secret",
@@ -238,6 +240,8 @@ func TestDatasources_Vault_AppRoleAuth(t *testing.T) {
 }
 
 func TestDatasources_Vault_AppIDAuth(t *testing.T) {
+	t.Skip("AppID auth is in 'Pending Removal' in Vault as of 1.12.0 - see https://support.hashicorp.com/hc/en-us/articles/13203258987027-Unable-to-Start-Vault-Due-to-Pending-Removal-Error")
+
 	v := setupDatasourcesVaultTest(t)
 
 	v.vc.Logical().Write("secret/foo", map[string]interface{}{"value": "bar"})

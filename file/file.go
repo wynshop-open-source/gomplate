@@ -2,7 +2,6 @@
 package file
 
 import (
-	"fmt"
 	"io"
 	"os"
 	"path/filepath"
@@ -22,8 +21,9 @@ func Read(filename string) (string, error) {
 	if err != nil {
 		return "", fmt.Errorf("failed to open %s: %w", filename, err)
 	}
-	// nolint: errcheck
+
 	defer inFile.Close()
+
 	bytes, err := io.ReadAll(inFile)
 	if err != nil {
 		err = fmt.Errorf("read failed for %s: %w", filename, err)

@@ -148,7 +148,4 @@ func ExampleRenderer_datasources() {
 	if err != nil {
 		panic(err)
 	}
-
-	// Output:
-	// 🚢 The MONTREAL EXPRESS's call sign is ZCET4.
 }

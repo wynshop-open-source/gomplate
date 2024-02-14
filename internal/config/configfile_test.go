@@ -478,8 +478,10 @@ func TestParseDataSourceFlags(t *testing.T) {
 		[]string{"baz=foo/bar/baz.json"},
 		[]string{"foo=http://example.com"},
 		nil,
-		[]string{"foo=Accept: application/json",
-			"bar=Authorization: Basic xxxxx"})
+		[]string{
+			"foo=Accept: application/json",
+			"bar=Authorization: Basic xxxxx",
+		})
 	assert.NoError(t, err)
 	assert.EqualValues(t, &Config{
 		DataSources: map[string]DataSource{
@@ -503,8 +505,10 @@ func TestParseDataSourceFlags(t *testing.T) {
 		nil,
 		nil,
 		[]string{"foo=http://example.com", "file.tmpl", "tmpldir/"},
-		[]string{"foo=Accept: application/json",
-			"bar=Authorization: Basic xxxxx"})
+		[]string{
+			"foo=Accept: application/json",
+			"bar=Authorization: Basic xxxxx",
+		})
 	assert.NoError(t, err)
 	assert.EqualValues(t, &Config{
 		Templates: Templates{

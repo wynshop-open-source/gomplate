@@ -2,7 +2,6 @@ package data
 
 import (
 	"context"
-	"fmt"
 	"io"
 	"mime"
 	"net/http"

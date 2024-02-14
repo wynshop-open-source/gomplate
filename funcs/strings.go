@@ -20,6 +20,9 @@ import (
 	"github.com/gosimple/slug"
 	"golang.org/x/text/cases"
 	"golang.org/x/text/language"
+
+	"github.com/gosimple/slug"
+	gompstrings "github.com/hairyhenderson/gomplate/v3/strings"
 )
 
 // StrNS -

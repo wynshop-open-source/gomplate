@@ -1,15 +1,13 @@
 package data
 
 import (
-	"fmt"
+	"os"
 	"testing"
 	"time"
 
 	"github.com/ugorji/go/codec"
 
 	"github.com/stretchr/testify/assert"
-
-	"os"
 
 	"gotest.tools/v3/fs"
 )
@@ -64,12 +62,14 @@ escaped: "\"\/\\\b\f\n\r\t\u221e"
 }
 
 func TestUnmarshalArray(t *testing.T) {
-	expected := []interface{}{"foo", "bar",
+	expected := []interface{}{
+		"foo", "bar",
 		map[string]interface{}{
 			"baz":   map[string]interface{}{"qux": true},
 			"quux":  map[string]interface{}{"42": 18},
 			"corge": map[string]interface{}{"false": "blah"},
-		}}
+		},
+	}
 
 	test := func(actual []interface{}, err error) {
 		assert.NoError(t, err)
@@ -166,15 +166,13 @@ func TestToJSONBytes(t *testing.T) {
 	assert.Error(t, err)
 }
 
-type badObject struct {
-}
+type badObject struct{}
 
-func (b *badObject) CodecEncodeSelf(e *codec.Encoder) {
+func (b *badObject) CodecEncodeSelf(_ *codec.Encoder) {
 	panic("boom")
 }
 
-func (b *badObject) CodecDecodeSelf(e *codec.Decoder) {
-
+func (b *badObject) CodecDecodeSelf(_ *codec.Decoder) {
 }
 
 func TestToJSON(t *testing.T) {

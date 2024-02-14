@@ -22,7 +22,7 @@ import (
 	"github.com/hairyhenderson/toml"
 	"github.com/ugorji/go/codec"
 
-	"github.com/hairyhenderson/yaml"
+	yaml "github.com/hairyhenderson/yaml"
 )
 
 func unmarshalObj(obj map[string]interface{}, in string, f func([]byte, interface{}) error) (map[string]interface{}, error) {

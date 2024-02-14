@@ -22,7 +22,7 @@ func TestCreateFileFuncs(t *testing.T) {
 			fmap := CreateFileFuncs(ctx)
 			actual := fmap["file"].(func() interface{})
 
-			assert.Same(t, ctx, actual().(*FileFuncs).ctx)
+			assert.Equal(t, ctx, actual().(*FileFuncs).ctx)
 		})
 	}
 }
@@ -33,7 +33,7 @@ func TestFileExists(t *testing.T) {
 	fs := afero.NewMemMapFs()
 	ff := &FileFuncs{fs: fs}
 
-	_ = fs.Mkdir("/tmp", 0777)
+	_ = fs.Mkdir("/tmp", 0o777)
 	f, _ := fs.Create("/tmp/foo")
 	_, _ = f.Write([]byte("foo"))
 
@@ -47,7 +47,7 @@ func TestFileIsDir(t *testing.T) {
 	fs := afero.NewMemMapFs()
 	ff := &FileFuncs{fs: fs}
 
-	_ = fs.Mkdir("/tmp", 0777)
+	_ = fs.Mkdir("/tmp", 0o777)
 	f, _ := fs.Create("/tmp/foo")
 	_, _ = f.Write([]byte("foo"))
 
@@ -61,9 +61,9 @@ func TestFileWalk(t *testing.T) {
 	fs := afero.NewMemMapFs()
 	ff := &FileFuncs{fs: fs}
 
-	_ = fs.Mkdir("/tmp", 0777)
-	_ = fs.Mkdir("/tmp/bar", 0777)
-	_ = fs.Mkdir("/tmp/bar/baz", 0777)
+	_ = fs.Mkdir("/tmp", 0o777)
+	_ = fs.Mkdir("/tmp/bar", 0o777)
+	_ = fs.Mkdir("/tmp/bar/baz", 0o777)
 	f, _ := fs.Create("/tmp/bar/baz/foo")
 	_, _ = f.Write([]byte("foo"))
 

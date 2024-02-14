@@ -16,6 +16,7 @@ import (
 
 	"github.com/hairyhenderson/gomplate/v3/internal/iohelpers"
 	"github.com/hairyhenderson/yaml"
+	"github.com/pkg/errors"
 )
 
 // Parse a config file
@@ -557,7 +558,7 @@ func (c *Config) GetMode() (os.FileMode, bool, error) {
 	}
 	mode := iohelpers.NormalizeFileMode(os.FileMode(m))
 	if mode == 0 && c.Input != "" {
-		mode = iohelpers.NormalizeFileMode(0644)
+		mode = iohelpers.NormalizeFileMode(0o644)
 	}
 	return mode, modeOverride, nil
 }
