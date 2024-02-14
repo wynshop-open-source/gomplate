@@ -63,8 +63,9 @@ func readGCPSecretManager(ctx context.Context, source *Source, args ...string) (
 			if len(matches) != 2 {
 				return nil, fmt.Errorf("unexpected secret name format: %s", resp.GetName())
 			}
-			_, err = source.gcpSecretManager.GetSecretVersion(ctx, &getReq)
-			if err == nil {
+			vers, err := source.gcpSecretManager.GetSecretVersion(ctx, &getReq)
+			// Don't return disabled/destroyed secrets
+			if err == nil && vers.GetState() == secretmanagerpb.SecretVersion_ENABLED {
 				secrets = append(secrets, matches[1])
 			}
 		}
