@@ -3,6 +3,7 @@ module github.com/hairyhenderson/gomplate/v3
 go 1.23.0
 
 require (
+	cloud.google.com/go/secretmanager v1.9.0
 	github.com/Masterminds/goutils v1.1.1
 	github.com/Shopify/ejson v1.3.3
 	github.com/aws/aws-sdk-go v1.44.209
@@ -11,6 +12,7 @@ require (
 	github.com/go-git/go-billy/v5 v5.6.0
 	github.com/go-git/go-git/v5 v5.13.0
 	github.com/google/uuid v1.3.0
+	github.com/googleapis/gax-go/v2 v2.7.0
 	github.com/gosimple/slug v1.13.1
 	github.com/hairyhenderson/go-fsimpl v0.0.0-20230121155226-8aa24800449d
 	github.com/hairyhenderson/toml v0.4.2-0.20210923231440-40456b8e66cf
@@ -26,12 +28,14 @@ require (
 	github.com/stretchr/testify v1.10.0
 	github.com/ugorji/go/codec v1.2.10
 	github.com/zealic/xignore v0.3.3
+	go.etcd.io/bbolt v1.3.6
 	go4.org/netipx v0.0.0-20230125063823-8449b0a6169f
 	gocloud.dev v0.28.0
 	golang.org/x/crypto v0.40.0
 	golang.org/x/sys v0.34.0
 	golang.org/x/term v0.33.0
 	golang.org/x/text v0.27.0
+	google.golang.org/api v0.106.0
 	gotest.tools/v3 v3.4.0
 	inet.af/netaddr v0.0.0-20220811202034-502d2d690317
 	k8s.io/client-go v0.26.1
@@ -83,7 +87,6 @@ require (
 	github.com/google/go-cmp v0.6.0 // indirect
 	github.com/google/wire v0.5.0 // indirect
 	github.com/googleapis/enterprise-certificate-proxy v0.2.1 // indirect
-	github.com/googleapis/gax-go/v2 v2.7.0 // indirect
 	github.com/gosimple/unidecode v1.0.1 // indirect
 	github.com/hashicorp/errwrap v1.1.0 // indirect
 	github.com/hashicorp/go-cleanhttp v0.5.2 // indirect
@@ -125,7 +128,6 @@ require (
 	golang.org/x/time v0.2.0 // indirect
 	golang.org/x/tools v0.34.0 // indirect
 	golang.org/x/xerrors v0.0.0-20220907171357-04be3eba64a2 // indirect
-	google.golang.org/api v0.106.0 // indirect
 	google.golang.org/appengine v1.6.7 // indirect
 	google.golang.org/genproto v0.0.0-20221227171554-f9683d7f8bef // indirect
 	google.golang.org/grpc v1.51.0 // indirect
