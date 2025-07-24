@@ -1,6 +1,6 @@
 FROM vault:1.12.3 AS vault
 
-FROM consul:1.13.9 AS consul
+FROM consul:1.15.4 AS consul
 
 FROM golang:1.21-alpine
 

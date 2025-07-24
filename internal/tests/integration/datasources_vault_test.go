@@ -240,7 +240,9 @@ func TestDatasources_Vault_AppRoleAuth(t *testing.T) {
 }
 
 func TestDatasources_Vault_AppIDAuth(t *testing.T) {
-	t.Skip("AppID auth is in 'Pending Removal' in Vault as of 1.12.0 - see https://support.hashicorp.com/hc/en-us/articles/13203258987027-Unable-to-Start-Vault-Due-to-Pending-Removal-Error")
+	// temporarily allow the deprecated pending-removal appID auth method
+	// when this starts failing completely, we should remove support
+	t.Setenv("VAULT_ALLOW_PENDING_REMOVAL_MOUNTS", "true")
 
 	v := setupDatasourcesVaultTest(t)
 
