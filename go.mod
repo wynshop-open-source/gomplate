@@ -1,6 +1,6 @@
 module github.com/hairyhenderson/gomplate/v3
 
-go 1.23.0
+go 1.23.12
 
 require (
 	cloud.google.com/go/secretmanager v1.9.0
