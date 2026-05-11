@@ -4,9 +4,12 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
-	"google.golang.org/api/iterator"
 	"regexp"
 	"strings"
+
+	"google.golang.org/api/iterator"
+	"google.golang.org/grpc/codes"
+	"google.golang.org/grpc/status"
 
 	secretmanager "cloud.google.com/go/secretmanager/apiv1"
 	"cloud.google.com/go/secretmanager/apiv1/secretmanagerpb"
@@ -64,8 +67,14 @@ func readGCPSecretManager(ctx context.Context, source *Source, args ...string) (
 				return nil, fmt.Errorf("unexpected secret name format: %s", resp.GetName())
 			}
 			vers, err := source.gcpSecretManager.GetSecretVersion(ctx, &getReq)
+			if err != nil {
+				if status.Code(err) == codes.NotFound {
+					continue
+				}
+				return nil, err
+			}
 			// Don't return disabled/destroyed secrets
-			if err == nil && vers.GetState() == secretmanagerpb.SecretVersion_ENABLED {
+			if vers.GetState() == secretmanagerpb.SecretVersion_ENABLED {
 				secrets = append(secrets, matches[1])
 			}
 		}
